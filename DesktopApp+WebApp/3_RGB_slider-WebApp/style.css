@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    width: 350px; /* 稍微宽一点以适应 web */
+}
+
+/* 1. 文本组件区域 */
+.color-box {
+    height: 150px;
+    background-color: #7F7F7F; /* 初始颜色 */
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 15px;
+    transition: background-color 0.1s;
+}
+
+/* 2. 十六进制标签 */
+.hex-display {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-family: monospace; /* 等宽字体显示代码更合适 */
+}
+
+/* 3. 滑块区域 */
+.slider-group {
+    margin-bottom: 15px;
+}
+
+.slider-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+.slider-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.min-label, .max-label {
+    font-size: 12px;
+    color: #666;
+    min-width: 20px;
+}
+
+input[type=range] {
+    flex-grow: 1; /* 占据剩余空间 */
+    cursor: pointer;
+}

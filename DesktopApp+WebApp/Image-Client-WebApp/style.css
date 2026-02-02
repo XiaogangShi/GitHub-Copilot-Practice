@@ -1,0 +1,176 @@
+/* 全局设置 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* 应用容器：模拟 800x400 的窗口 */
+.app-container {
+    width: 800px;
+    height: 500px; /* 稍微高一点，网页版看着舒服 */
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* 防止溢出 */
+}
+
+/* === 上部区域 === */
+.top-section {
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #fff;
+}
+
+.controls-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.label-text {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+#search-input {
+    flex-grow: 1; /* 占据剩余空间 */
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+#search-input:focus {
+    border-color: #4a90e2;
+}
+
+#search-btn {
+    padding: 8px 20px;
+    font-size: 14px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#search-btn:hover {
+    background-color: #0069d9;
+}
+
+.hint-row {
+    color: gray;
+    font-size: 13px;
+    text-align: left;
+    padding-left: 2px;
+}
+
+/* === 下部区域 === */
+.bottom-section {
+    flex-grow: 1; /* 占据剩余高度 */
+    background-color: #f7f7f7;
+    padding: 10px;
+    overflow: hidden; /* 内部滚动 */
+}
+
+.content-container {
+    display: flex;
+    height: 100%;
+    gap: 10px;
+}
+
+/* 左侧列表：自适应宽度 */
+.list-pane {
+    background-color: white;
+    border: 1px solid #ccc;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* 最小宽度和最大宽度限制，模拟 Tkinter 的行为 */
+    min-width: 200px;
+    max-width: 400px;
+    /* 让宽度根据内容自适应 (fit-content)，但在 flexbox 中需要特殊处理 */
+    width: fit-content; 
+    display: flex;     /* 为了让 ul 撑开宽度 */
+    flex-direction: column;
+}
+
+#result-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    /* 列表项不换行，确保护展宽度 */
+    white-space: nowrap; 
+}
+
+#result-list li {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.1s;
+}
+
+#result-list li:hover {
+    background-color: #e6f7ff;
+}
+
+#result-list li.selected {
+    background-color: #bae7ff;
+    color: #000;
+}
+
+#result-list li.info-msg {
+    color: #666;
+    font-style: italic;
+    cursor: default;
+}
+
+#result-list li.info-msg:hover {
+    background-color: transparent;
+}
+
+/* 右侧预览：占据剩余空间，居中 */
+.preview-pane {
+    flex-grow: 1;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* 裁剪大图 */
+    padding: 10px;
+    position: relative; /* 定位参考 */
+}
+
+.preview-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+#preview-text {
+    color: #888;
+    font-size: 16px;
+}
+
+#preview-img {
+    /* 限制最大尺寸，保持宽高比 */
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}

@@ -1,0 +1,102 @@
+/* 全局样式重置，确保 body 占满全屏以便居中 */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex; /* 使用 Flexbox */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    background-color: #f0f2f5; /* 浅灰色背景，突出轮播图 */
+    font-family: Arial, sans-serif;
+}
+
+/* 轮播图主容器 */
+.carousel-container {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    overflow: hidden; /* 隐藏超出容器的部分 */
+    background-color: #000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* 加一点阴影更美观 */
+    border-radius: 8px;
+}
+
+/* 轮播轨道：横向排列所有幻灯片 */
+.carousel-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    /* 关键：平滑滚动的动画效果 */
+    transition: transform 0.5s ease-in-out;
+}
+
+/* 单个幻灯片样式 */
+.carousel-slide {
+    min-width: 800px; /* 确保每个 slide 宽度固定 */
+    height: 600px;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 左右切换按钮样式 */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 24px;
+    padding: 16px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s;
+}
+
+.carousel-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.btn-prev {
+    left: 0;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.btn-next {
+    right: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+/* 底部指示器容器 */
+.carousel-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+/* 单个圆点样式 */
+.indicator {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* 当前激活的圆点样式 */
+.indicator.active {
+    background-color: #fff;
+    transform: scale(1.2); /* 稍微放大一点 */
+}

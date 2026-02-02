@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RGB 颜色选择器 Web 版</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 1. 文本组件区域：显示背景色 -->
+        <div id="color-display" class="color-box">
+            滑动滑块改变背景颜色
+        </div>
+
+        <!-- 2. 标签组件区域：显示十六进制颜色值 -->
+        <div id="hex-label" class="hex-display">
+            #7F7F7F
+        </div>
+
+        <!-- 3. 滑块组件区域 -->
+        <div class="sliders-container">
+            <!-- 红色滑块 -->
+            <div class="slider-group">
+                <div class="slider-header">
+                    <label>红色 (Red)</label>
+                    <span id="red-val">127</span>
+                </div>
+                <div class="slider-row">
+                    <span class="min-label">00</span>
+                    <input type="range" id="red-slider" min="0" max="255" value="127">
+                    <span class="max-label">ff</span>
+                </div>
+            </div>
+
+            <!-- 绿色滑块 -->
+            <div class="slider-group">
+                <div class="slider-header">
+                    <label>绿色 (Green)</label>
+                    <span id="green-val">127</span>
+                </div>
+                <div class="slider-row">
+                    <span class="min-label">00</span>
+                    <input type="range" id="green-slider" min="0" max="255" value="127">
+                    <span class="max-label">ff</span>
+                </div>
+            </div>
+
+            <!-- 蓝色滑块 -->
+            <div class="slider-group">
+                <div class="slider-header">
+                    <label>蓝色 (Blue)</label>
+                    <span id="blue-val">127</span>
+                </div>
+                <div class="slider-row">
+                    <span class="min-label">00</span>
+                    <input type="range" id="blue-slider" min="0" max="255" value="127">
+                    <span class="max-label">ff</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

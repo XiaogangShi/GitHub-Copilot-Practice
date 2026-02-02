@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星光洒落特效 - Canvas 鼠标跟随</title>
+    <style>
+        /* 1. 页面基本样式设置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000; /* 纯黑背景 */
+            overflow: hidden;       /* 隐藏滚动条 */
+            width: 100vw;
+            height: 100vh;
+            /* 确保文字和Canvas能正确堆叠 */
+            position: relative;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+
+        /* Canvas 元素全屏显示 */
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            /* Canvas 在底层 */
+            z-index: 1;
+        }
+
+        /* =========================================
+           新增：引导提示文字的样式
+           ========================================= */
+        #intro-text {
+            /* 绝对定位实现居中 */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* 精确居中 */
+
+            /* 文字样式 */
+            color: #888;       /* 灰色 */
+            font-size: 32px;   /* 32px 大小 */
+            font-weight: 300;  /* 字体稍微细一点更优雅 */
+            white-space: nowrap; /* 防止文字换行 */
+
+            /* 关键属性：让鼠标事件“穿透”文字 */
+            /* 这样鼠标划过文字时，底下的 Canvas 依然能感应到并画出星星 */
+            pointer-events: none;
+
+            /* 层级高于 Canvas */
+            z-index: 10;
+
+            /* 动画过渡设置：针对 opacity 属性进行平滑过渡 */
+            transition: opacity 2s ease-out;
+            opacity: 1; /* 初始状态为可见 */
+        }
+
+        /* 用于隐藏文字的类 */
+        .fade-out {
+            opacity: 0 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 新增：引导提示文字 -->
+    <div id="intro-text">试着用鼠标画出你的满天星吧！</div>
+
+    <!-- 核心画布元素 -->
+    <canvas id="starCanvas"></canvas>
+
+    <script>
+        /**
+         * ------------------------------------------------------------------
+         * 第一部分：引导文字的淡出逻辑
+         * ------------------------------------------------------------------
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            const introText = document.getElementById('intro-text');
+
+            // 设置定时器：3秒后开始执行淡出
+            setTimeout(() => {
+                // 添加 CSS 类，触发 opacity: 0 的过渡动画
+                introText.classList.add('fade-out');
+
+                // 等待 CSS 动画结束（这里设置2秒动画，稍微多给点缓冲时间移除元素）
+                setTimeout(() => {
+                    if(introText) {
+                        introText.remove(); // 从 DOM 中彻底移除，释放内存
+                    }
+                }, 2000); // 对应 CSS 中的 transition: 2s
+            }, 3000); // 停留 3 秒
+        });
+
+
+        /**
+         * ------------------------------------------------------------------
+         * 第二部分：Canvas 粒子特效逻辑 (同之前优化过的版本)
+         * ------------------------------------------------------------------
+         */
+        const canvas = document.getElementById('starCanvas');
+        const ctx = canvas.getContext('2d');
+        const particlesArray = [];
+        let hue = 0;
+
+        // 鼠标位置对象
+        const mouse = {
+            x: undefined,
+            y: undefined
+        };
+
+        // 设置 Canvas 尺寸填满屏幕
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // 交互逻辑：监听鼠标移动
+        canvas.addEventListener('mousemove', function(event) {
+            mouse.x = event.x;
+            mouse.y = event.y;
+            // 每次移动生成 3 个粒子
+            for (let i = 0; i < 3; i++) {
+                particlesArray.push(new Particle());
+            }
+        });
+
+        // 粒子类定义
+        class Particle {
+            constructor() {
+                this.x = mouse.x;
+                this.y = mouse.y;
+                this.size = Math.random() * 10 + 5; // 随机大小
+
+                // 物理属性：扩散与重力
+                this.speedX = (Math.random() * 3) - 1.5;
+                this.speedY = (Math.random() * 3) - 1.5;
+
+                // 颜色：彩虹色
+                this.color = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.speedY += 0.1; // 重力效果
+
+                // 消失机制：逐渐变小
+                if (this.size > 0.2) this.size -= 0.1;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                // 绘制五角星
+                const cx = this.x;
+                const cy = this.y;
+                const spikes = 5;
+                const outerRadius = this.size;
+                const innerRadius = this.size / 2;
+                let rot = Math.PI / 2 * 3;
+                let x = cx;
+                let y = cy;
+                let step = Math.PI / spikes;
+
+                ctx.moveTo(cx, cy - outerRadius);
+                for (let i = 0; i < spikes; i++) {
+                    x = cx + Math.cos(rot) * outerRadius;
+                    y = cy + Math.sin(rot) * outerRadius;
+                    ctx.lineTo(x, y);
+                    rot += step;
+                    x = cx + Math.cos(rot) * innerRadius;
+                    y = cy + Math.sin(rot) * innerRadius;
+                    ctx.lineTo(x, y);
+                    rot += step;
+                }
+                ctx.lineTo(cx, cy - outerRadius);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
+        // 动画循环
+        function handleParticles() {
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+
+                // 移除过小的粒子
+                if (particlesArray[i].size <= 0.3) {
+                    particlesArray.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+
+        function animate() {
+            // 绘制半透明蒙版实现拖尾效果
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            handleParticles();
+            hue += 2; // 改变全局色相（可选）
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+Log file created at: 2026/01/19 09:03:28
+Running on machine: 6147cdc81451
+Running duration (h:mm:ss): 0:00:00
+Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I20260119 09:03:28.750763     1 StorageDaemon.cpp:132] localhost = "storaged0":9779
+I20260119 09:03:28.752555     1 StorageDaemon.cpp:147] data path= /data/storage
+I20260119 09:03:28.771217     1 MetaClient.cpp:80] Create meta client to "metad2":9559
+I20260119 09:03:28.771613     1 MetaClient.cpp:81] root path: /usr/local/nebula, data path size: 1
+W20260119 09:03:28.772125     1 FileBasedClusterIdMan.cpp:43] Open file failed, error No such file or directory
+I20260119 09:03:28.851208    48 ThriftClientManager-inl.h:67] resolve "metad1":9559 as "172.21.0.2":9559
+I20260119 09:03:29.858582    48 ThriftClientManager-inl.h:67] resolve "metad0":9559 as "172.21.0.3":9559
+I20260119 09:03:31.871178    48 MetaClient.cpp:2672] Persist the cluster Id from metad 1203259763272530483
+I20260119 09:03:31.871359    48 FileBasedClusterIdMan.cpp:21] Remove the existed file cluster.id
+I20260119 09:03:31.871654    48 FileBasedClusterIdMan.cpp:34] Persist clusterId 1203259763272530483 succeeded!
+I20260119 09:03:31.872992    54 ThriftClientManager-inl.h:67] resolve "metad0":9559 as "172.21.0.3":9559
+I20260119 09:03:31.874567    55 ThriftClientManager-inl.h:67] resolve "metad0":9559 as "172.21.0.3":9559
+I20260119 09:03:31.876068    56 ThriftClientManager-inl.h:67] resolve "metad0":9559 as "172.21.0.3":9559
+I20260119 09:03:31.877436    57 ThriftClientManager-inl.h:67] resolve "metad0":9559 as "172.21.0.3":9559
+I20260119 09:03:31.878756    58 ThriftClientManager-inl.h:67] resolve "metad0":9559 as "172.21.0.3":9559
+I20260119 09:03:31.880446    59 ThriftClientManager-inl.h:67] resolve "metad0":9559 as "172.21.0.3":9559
+I20260119 09:03:31.881944    60 ThriftClientManager-inl.h:67] resolve "metad0":9559 as "172.21.0.3":9559
+I20260119 09:03:31.882702     1 MetaClient.cpp:3263] Load leader of "storaged0":9779 in 0 space
+I20260119 09:03:31.882951     1 MetaClient.cpp:3263] Load leader of "storaged1":9779 in 0 space
+I20260119 09:03:31.883142     1 MetaClient.cpp:3263] Load leader of "storaged2":9779 in 0 space
+I20260119 09:03:31.883322     1 MetaClient.cpp:3269] Load leader ok
+I20260119 09:03:31.884233    61 ThriftClientManager-inl.h:67] resolve "metad0":9559 as "172.21.0.3":9559
+I20260119 09:03:31.907918    62 ThriftClientManager-inl.h:67] resolve "metad0":9559 as "172.21.0.3":9559
+I20260119 09:03:31.910811     1 MetaClient.cpp:162] Register time task for heartbeat!
+I20260119 09:03:31.911100     1 StorageServer.cpp:250] Init schema manager
+I20260119 09:03:31.911295     1 StorageServer.cpp:253] Init index manager
+I20260119 09:03:31.911489     1 StorageServer.cpp:256] Init kvstore
+I20260119 09:03:31.911710     1 NebulaStore.cpp:48] Start the raft service...
+I20260119 09:03:31.912987     1 NebulaSnapshotManager.cpp:25] Send snapshot is rate limited to 10485760 for each part by default
+I20260119 09:03:31.930207     1 RaftexService.cpp:46] Start raft service on 9780
+I20260119 09:03:31.930769     1 NebulaStore.cpp:82] Scan the local path, and init the spaces_
+E20260119 09:03:31.931159     1 FileUtils.cpp:377] Failed to read the directory "/data/storage/nebula" (2): No such file or directory
+I20260119 09:03:31.932823     1 NebulaStore.cpp:292] Init data from partManager for "storaged0":9779
+I20260119 09:03:31.933362     1 NebulaStore.cpp:75] Register handler...
+I20260119 09:03:31.933629     1 StorageServer.cpp:259] Init LogMonitor
+I20260119 09:03:31.934441     1 StorageServer.cpp:126] Starting Storage HTTP Service
+I20260119 09:03:31.935129     1 StorageServer.cpp:130] Http Thread Pool started
+I20260119 09:03:31.939429    80 WebService.cpp:124] Web service started on HTTP[19779]
+I20260119 09:03:31.941686     1 RocksEngineConfig.cpp:371] Emplace rocksdb option max_bytes_for_level_base=268435456
+I20260119 09:03:31.941892     1 RocksEngineConfig.cpp:371] Emplace rocksdb option max_write_buffer_number=4
+I20260119 09:03:31.942292     1 RocksEngineConfig.cpp:371] Emplace rocksdb option write_buffer_size=67108864
+I20260119 09:03:31.942714     1 RocksEngineConfig.cpp:371] Emplace rocksdb option block_size=8192
+I20260119 09:03:31.967422     1 RocksEngine.cpp:107] open rocksdb on /data/storage/nebula/0/data
+I20260119 09:03:31.968189     1 AdminTaskManager.cpp:22] max concurrent subtasks: 10
+I20260119 09:03:31.968516   104 AdminTaskManager.cpp:224] waiting for incoming task
+I20260119 09:03:31.968601     1 AdminTaskManager.cpp:40] exit AdminTaskManager::init()
+E20260119 09:03:31.989622     1 MemoryUtils.cpp:167] Total memory less than untracked 50 Mib, MemoryTracker limit is not set properly,  Current memory stats:MemoryStats: 8589934592.000GiB/127.999MiB
+I20260119 09:03:31.990084     1 MemoryUtils.cpp:171] MemoryTracker set static ratio: 0.8
+I20260119 09:03:42.558959    63 ThriftClientManager-inl.h:67] resolve "metad0":9559 as "172.21.0.3":9559
+I20260119 09:03:52.573308    64 ThriftClientManager-inl.h:67] resolve "metad0":9559 as "172.21.0.3":9559
+I20260119 09:04:02.585371    65 ThriftClientManager-inl.h:67] resolve "metad0":9559 as "172.21.0.3":9559
+I20260119 09:04:12.595726    72 ThriftClientManager-inl.h:67] resolve "metad0":9559 as "172.21.0.3":9559
+I20260119 09:04:22.610160    73 ThriftClientManager-inl.h:67] resolve "metad0":9559 as "172.21.0.3":9559
+I20260119 09:04:32.626266    74 ThriftClientManager-inl.h:67] resolve "metad0":9559 as "172.21.0.3":9559
+I20260119 10:32:55.561143    66 MetaClient.cpp:3263] Load leader of "storaged0":9779 in 0 space
+I20260119 10:32:55.561872    66 MetaClient.cpp:3263] Load leader of "storaged1":9779 in 0 space
+I20260119 10:32:55.562085    66 MetaClient.cpp:3263] Load leader of "storaged2":9779 in 0 space
+I20260119 10:32:55.562317    66 MetaClient.cpp:3269] Load leader ok
+I20260119 10:32:55.562794    66 NebulaStore.cpp:417] Create data space 1
+I20260119 10:32:55.565335  1369 RocksEngineConfig.cpp:371] Emplace rocksdb option max_bytes_for_level_base=268435456
+I20260119 10:32:55.565625  1369 RocksEngineConfig.cpp:371] Emplace rocksdb option max_write_buffer_number=4
+I20260119 10:32:55.565940  1369 RocksEngineConfig.cpp:371] Emplace rocksdb option write_buffer_size=67108864
+I20260119 10:32:55.566326  1369 RocksEngineConfig.cpp:371] Emplace rocksdb option block_size=8192
+I20260119 10:32:55.596616  1369 RocksEngine.cpp:107] open rocksdb on /data/storage/nebula/1/data
+I20260119 10:32:55.599679    66 NebulaStore.cpp:480] Space 1, part 2 has been added, asLearner 0
+I20260119 10:32:55.601249    66 NebulaStore.cpp:480] Space 1, part 8 has been added, asLearner 0
+I20260119 10:32:55.602687    66 NebulaStore.cpp:480] Space 1, part 5 has been added, asLearner 0
+I20260119 10:33:05.623472    66 MetaClient.cpp:3263] Load leader of "storaged0":9779 in 1 space
+I20260119 10:33:05.623809    66 MetaClient.cpp:3263] Load leader of "storaged1":9779 in 1 space
+I20260119 10:33:05.624107    66 MetaClient.cpp:3263] Load leader of "storaged2":9779 in 0 space
+I20260119 10:33:05.624392    66 MetaClient.cpp:3269] Load leader ok
+I20260119 10:33:15.649106    66 MetaClient.cpp:3263] Load leader of "storaged0":9779 in 1 space
+I20260119 10:33:15.649426    66 MetaClient.cpp:3263] Load leader of "storaged1":9779 in 1 space
+I20260119 10:33:15.649739    66 MetaClient.cpp:3263] Load leader of "storaged2":9779 in 1 space
+I20260119 10:33:15.650043    66 MetaClient.cpp:3269] Load leader ok
+I20260119 10:43:46.555541    66 MetaClient.cpp:3263] Load leader of "storaged0":9779 in 1 space
+I20260119 10:43:46.556339    66 MetaClient.cpp:3263] Load leader of "storaged1":9779 in 1 space
+I20260119 10:43:46.556562    66 MetaClient.cpp:3263] Load leader of "storaged2":9779 in 1 space
+I20260119 10:43:46.556723    66 MetaClient.cpp:3269] Load leader ok
+I20260119 10:43:46.556962    66 NebulaStore.cpp:417] Create data space 2
+I20260119 10:43:46.559403  1532 RocksEngineConfig.cpp:371] Emplace rocksdb option max_bytes_for_level_base=268435456
+I20260119 10:43:46.559676  1532 RocksEngineConfig.cpp:371] Emplace rocksdb option max_write_buffer_number=4
+I20260119 10:43:46.559973  1532 RocksEngineConfig.cpp:371] Emplace rocksdb option write_buffer_size=67108864
+I20260119 10:43:46.560575  1532 RocksEngineConfig.cpp:371] Emplace rocksdb option block_size=8192
+I20260119 10:43:46.600647  1532 RocksEngine.cpp:107] open rocksdb on /data/storage/nebula/2/data
+I20260119 10:43:46.605830    66 NebulaStore.cpp:480] Space 2, part 2 has been added, asLearner 0
+I20260119 10:43:56.633921    66 MetaClient.cpp:3263] Load leader of "storaged0":9779 in 2 space
+I20260119 10:43:56.634369    66 MetaClient.cpp:3263] Load leader of "storaged1":9779 in 1 space
+I20260119 10:43:56.634645    66 MetaClient.cpp:3263] Load leader of "storaged2":9779 in 1 space
+I20260119 10:43:56.634868    66 MetaClient.cpp:3269] Load leader ok
+I20260119 10:44:06.658267    66 MetaClient.cpp:3263] Load leader of "storaged0":9779 in 2 space
+I20260119 10:44:06.658444    66 MetaClient.cpp:3263] Load leader of "storaged1":9779 in 2 space
+I20260119 10:44:06.658593    66 MetaClient.cpp:3263] Load leader of "storaged2":9779 in 2 space
+I20260119 10:44:06.658732    66 MetaClient.cpp:3269] Load leader ok
+I20260119 10:44:36.704269    66 MetaClient.cpp:3263] Load leader of "storaged0":9779 in 2 space
+I20260119 10:44:36.704945    66 MetaClient.cpp:3263] Load leader of "storaged1":9779 in 2 space
+I20260119 10:44:36.705152    66 MetaClient.cpp:3263] Load leader of "storaged2":9779 in 2 space
+I20260119 10:44:36.705343    66 MetaClient.cpp:3269] Load leader ok
+I20260119 10:44:36.705629    66 NebulaStore.cpp:417] Create data space 3
+I20260119 10:44:36.707896  1562 RocksEngineConfig.cpp:371] Emplace rocksdb option max_bytes_for_level_base=268435456
+I20260119 10:44:36.708139  1562 RocksEngineConfig.cpp:371] Emplace rocksdb option max_write_buffer_number=4
+I20260119 10:44:36.708405  1562 RocksEngineConfig.cpp:371] Emplace rocksdb option write_buffer_size=67108864
+I20260119 10:44:36.708758  1562 RocksEngineConfig.cpp:371] Emplace rocksdb option block_size=8192
+I20260119 10:44:36.734354  1562 RocksEngine.cpp:107] open rocksdb on /data/storage/nebula/3/data
+I20260119 10:44:36.737057    66 NebulaStore.cpp:480] Space 3, part 2 has been added, asLearner 0
+I20260119 10:44:36.738775    66 NebulaStore.cpp:480] Space 3, part 5 has been added, asLearner 0
+I20260119 10:44:46.766360    66 MetaClient.cpp:3263] Load leader of "storaged0":9779 in 3 space
+I20260119 10:44:46.766728    66 MetaClient.cpp:3263] Load leader of "storaged1":9779 in 3 space
+I20260119 10:44:46.767015    66 MetaClient.cpp:3263] Load leader of "storaged2":9779 in 2 space
+I20260119 10:44:46.767292    66 MetaClient.cpp:3269] Load leader ok
+I20260119 10:44:56.788900    66 MetaClient.cpp:3263] Load leader of "storaged0":9779 in 3 space
+I20260119 10:44:56.789186    66 MetaClient.cpp:3263] Load leader of "storaged1":9779 in 3 space
+I20260119 10:44:56.789496    66 MetaClient.cpp:3263] Load leader of "storaged2":9779 in 3 space
+I20260119 10:44:56.789745    66 MetaClient.cpp:3269] Load leader ok
+I20260120 06:38:21.073035    73 ThriftClientManager-inl.h:67] resolve "metad2":9559 as "172.21.0.4":9559
+I20260120 06:38:31.155380    56 ThriftClientManager-inl.h:67] resolve "metad2":9559 as "172.21.0.4":9559
+I20260120 06:38:41.189668    48 ThriftClientManager-inl.h:67] resolve "metad2":9559 as "172.21.0.4":9559
+I20260120 06:38:51.292711    72 ThriftClientManager-inl.h:67] resolve "metad2":9559 as "172.21.0.4":9559
+I20260120 06:39:01.354388    63 ThriftClientManager-inl.h:67] resolve "metad2":9559 as "172.21.0.4":9559
+I20260120 06:54:35.549017    55 ThriftClientManager-inl.h:67] resolve "metad2":9559 as "172.21.0.4":9559
+I20260120 06:54:45.567700    62 ThriftClientManager-inl.h:67] resolve "metad2":9559 as "172.21.0.4":9559
+I20260120 06:55:05.501590    74 ThriftClientManager-inl.h:67] resolve "metad2":9559 as "172.21.0.4":9559
+I20260120 06:55:15.512202    65 ThriftClientManager-inl.h:67] resolve "metad2":9559 as "172.21.0.4":9559
+I20260120 06:55:35.529677    59 ThriftClientManager-inl.h:67] resolve "metad2":9559 as "172.21.0.4":9559
+I20260120 06:56:25.622915    60 ThriftClientManager-inl.h:67] resolve "metad2":9559 as "172.21.0.4":9559
+I20260120 06:56:35.638054    57 ThriftClientManager-inl.h:67] resolve "metad2":9559 as "172.21.0.4":9559
+I20260120 06:56:45.650017    54 ThriftClientManager-inl.h:67] resolve "metad2":9559 as "172.21.0.4":9559
+I20260120 06:57:05.679061    64 ThriftClientManager-inl.h:67] resolve "metad2":9559 as "172.21.0.4":9559
+I20260120 06:57:15.691540    61 ThriftClientManager-inl.h:67] resolve "metad2":9559 as "172.21.0.4":9559
+I20260120 06:57:25.708743    58 ThriftClientManager-inl.h:67] resolve "metad2":9559 as "172.21.0.4":9559
+I20260120 16:36:49.852257    54 ThriftClientManager-inl.h:67] resolve "metad1":9559 as "172.21.0.2":9559
+I20260120 16:36:59.972504    60 ThriftClientManager-inl.h:67] resolve "metad1":9559 as "172.21.0.2":9559
+I20260120 16:37:09.984071    57 ThriftClientManager-inl.h:67] resolve "metad1":9559 as "172.21.0.2":9559
+I20260120 16:37:30.141801    65 ThriftClientManager-inl.h:67] resolve "metad1":9559 as "172.21.0.2":9559
+I20260120 18:37:45.380399    55 ThriftClientManager-inl.h:67] resolve "metad1":9559 as "172.21.0.2":9559
+I20260120 18:37:55.769029    48 ThriftClientManager-inl.h:67] resolve "metad1":9559 as "172.21.0.2":9559
+I20260120 18:38:05.787967    64 ThriftClientManager-inl.h:67] resolve "metad1":9559 as "172.21.0.2":9559
+I20260120 18:38:25.745087    72 ThriftClientManager-inl.h:67] resolve "metad1":9559 as "172.21.0.2":9559
+I20260120 20:38:52.518967    58 ThriftClientManager-inl.h:67] resolve "metad1":9559 as "172.21.0.2":9559
+I20260121 01:55:24.657168     1 StorageDaemon.cpp:201] Signal 15(Terminated) received, stopping this server
+I20260121 01:55:24.851493     1 NebulaStore.cpp:343] Stop the raft service...
+I20260121 01:55:24.854357     1 RaftexService.cpp:67] Stopping the raftex service on port 9780
+I20260121 01:55:24.858816     1 RaftexService.cpp:77] All partitions have stopped
+I20260121 01:55:24.870297     1 NebulaStore.cpp:346] Stop kv engine...
+I20260121 01:55:25.588371     1 AdminTaskManager.cpp:176] enter AdminTaskManager::shutdown()
+I20260121 01:55:25.589934   105 AdminTaskManager.cpp:146] Unreported-Admin-Thread stopped
+I20260121 01:55:25.593039   104 AdminTaskManager.cpp:231] detect AdminTaskManager::shutdown()
+I20260121 01:55:25.603704     1 RocksEngine.h:247] Release rocksdb on /data/storage/nebula/0
+I20260121 01:55:25.636776     1 AdminTaskManager.cpp:193] exit AdminTaskManager::shutdown()
+I20260121 01:55:25.637449     1 NebulaStore.cpp:343] Stop the raft service...
+I20260121 01:55:25.637820     1 RaftexService.cpp:67] Stopping the raftex service on port 9780
+I20260121 01:55:25.638892     1 RaftexService.cpp:77] All partitions have stopped
+I20260121 01:55:25.639168     1 NebulaStore.cpp:346] Stop kv engine...
+I20260121 01:55:25.640005     1 NebulaStore.cpp:36] Cut off the relationship with meta client
+I20260121 01:55:25.643666     1 Part.h:59] [Port: 9780, Space: 3, Part: 5] ~Part()
+I20260121 01:55:25.646277     1 Part.h:59] [Port: 9780, Space: 3, Part: 2] ~Part()
+I20260121 01:55:25.649353     1 RocksEngine.h:247] Release rocksdb on /data/storage/nebula/3
+I20260121 01:55:25.695806     1 Part.h:59] [Port: 9780, Space: 1, Part: 5] ~Part()
+I20260121 01:55:25.717167     1 Part.h:59] [Port: 9780, Space: 1, Part: 2] ~Part()
+I20260121 01:55:25.725741     1 Part.h:59] [Port: 9780, Space: 1, Part: 8] ~Part()
+I20260121 01:55:25.729722     1 RocksEngine.h:247] Release rocksdb on /data/storage/nebula/1

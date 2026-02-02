@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>历史记录隐私查看器</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部控制区域 -->
+        <div class="header">
+            <div class="search-container">
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="搜索历史记录..."
+                    autocomplete="off"
+                >
+            </div>
+            <button id="clearAllBtn" class="clear-btn">清除所有记录</button>
+        </div>
+
+        <!-- 历史记录列表区域 -->
+        <div id="historyList" class="history-list">
+            <!-- 记录将通过JavaScript动态生成 -->
+        </div>
+
+        <!-- 空状态提示 -->
+        <div id="emptyState" class="empty-state" style="display: none;">
+            <p>暂无浏览历史</p>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

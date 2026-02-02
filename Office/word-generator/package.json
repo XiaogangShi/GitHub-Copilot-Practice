@@ -1,0 +1,15 @@
+{
+  "name": "word-generator",
+  "version": "1.0.0",
+  "description": "用 Javascript 和 officegen编写代码，将工作目录设置为 JavaScript 脚本所在的目录。创建 Word 文档，然后在 Word文档中添加文本“地到无边天作界 山登绝顶我为峰”，然后将”天作界\"的字号设置为一号，并将文字颜色故選为红色，将“我为峰“的背發色改置为蓝色，文字颜色这置 为黄色，并加下画线。",
+  "main": "createWordDoc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "officegen": "^0.6.5"
+  }
+}

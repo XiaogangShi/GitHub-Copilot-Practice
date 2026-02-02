@@ -1,0 +1,33 @@
+Log file created at: 2026/01/21 01:59:37
+Running on machine: 758c9ce0a1f0
+Running duration (h:mm:ss): 0:00:00
+Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I20260121 01:59:37.411723     1 GraphDaemon.cpp:122] Starting Graph HTTP Service
+I20260121 01:59:37.469755     6 WebService.cpp:124] Web service started on HTTP[19669]
+I20260121 01:59:37.470001     1 GraphDaemon.cpp:136] Number of networking IO threads: 4
+I20260121 01:59:37.470145     1 GraphDaemon.cpp:145] Number of worker threads: 4
+I20260121 01:59:37.494175     1 MetaClient.cpp:80] Create meta client to "metad0":9559
+I20260121 01:59:37.494525     1 MetaClient.cpp:81] root path: /usr/local/nebula, data path size: 0
+I20260121 01:59:37.556880    30 ThriftClientManager-inl.h:67] resolve "metad2":9559 as "172.21.0.5":9559
+I20260121 01:59:38.563498    30 ThriftClientManager-inl.h:67] resolve "metad0":9559 as "172.21.0.7":9559
+I20260121 01:59:38.572932    31 ThriftClientManager-inl.h:67] resolve "metad0":9559 as "172.21.0.7":9559
+I20260121 01:59:38.576699    32 ThriftClientManager-inl.h:67] resolve "metad0":9559 as "172.21.0.7":9559
+I20260121 01:59:38.580214    33 ThriftClientManager-inl.h:67] resolve "metad0":9559 as "172.21.0.7":9559
+I20260121 01:59:38.599282     1 MetaClient.cpp:3263] Load leader of "storaged0":9779 in 0 space
+I20260121 01:59:38.599390     1 MetaClient.cpp:3263] Load leader of "storaged1":9779 in 0 space
+I20260121 01:59:38.599471     1 MetaClient.cpp:3263] Load leader of "storaged2":9779 in 0 space
+I20260121 01:59:38.599553     1 MetaClient.cpp:3269] Load leader ok
+I20260121 01:59:38.604363     1 MetaClient.cpp:162] Register time task for heartbeat!
+I20260121 01:59:38.605247     1 GraphSessionManager.cpp:337] Total of 0 sessions are loaded
+E20260121 01:59:38.624402     1 MemoryUtils.cpp:167] Total memory less than untracked 50 Mib, MemoryTracker limit is not set properly,  Current memory stats:MemoryStats: 8589934592.000GiB/32.000MiB
+I20260121 01:59:38.629010     1 MemoryUtils.cpp:171] MemoryTracker set static ratio: 0.8
+I20260121 01:59:38.632694     1 Snowflake.cpp:17] WorkerId init success: 3
+I20260121 01:59:38.633172    37 GraphServer.cpp:63] Starting nebula-graphd on graphd2:9669
+I20260121 01:59:59.253261    34 MetaClient.cpp:3263] Load leader of "storaged0":9779 in 3 space
+I20260121 01:59:59.253422    34 MetaClient.cpp:3263] Load leader of "storaged1":9779 in 3 space
+I20260121 01:59:59.253558    34 MetaClient.cpp:3263] Load leader of "storaged2":9779 in 3 space
+I20260121 01:59:59.253685    34 MetaClient.cpp:3269] Load leader ok
+I20260121 02:06:52.219612     1 GraphDaemon.cpp:176] Signal 15(Terminated) received, stopping this server
+I20260121 02:06:52.225073    37 GraphServer.cpp:74] nebula-graphd on graphd2:9669 has been stopped
+I20260121 02:06:52.225343     1 GraphDaemon.cpp:161] The graph Daemon stopped
+I20260121 02:06:52.226119     1 GraphServer.cpp:109] The graph server has been stopped

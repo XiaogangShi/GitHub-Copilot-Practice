@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web 计算器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator">
+        <!-- 文本输入框 -->
+        <div class="display-container">
+            <input type="text" id="display" readonly placeholder="0">
+        </div>
+
+        <!-- 按钮区域 -->
+        <div class="buttons">
+            <!-- 第 1 行 -->
+            <button class="btn" onclick="appendChar('7')">7</button>
+            <button class="btn" onclick="appendChar('8')">8</button>
+            <button class="btn" onclick="appendChar('9')">9</button>
+            <button class="btn operator" onclick="appendChar('+')">+</button>
+
+            <!-- 第 2 行 -->
+            <button class="btn" onclick="appendChar('4')">4</button>
+            <button class="btn" onclick="appendChar('5')">5</button>
+            <button class="btn" onclick="appendChar('6')">6</button>
+            <button class="btn operator" onclick="appendChar('-')">-</button>
+
+            <!-- 第 3 行 -->
+            <button class="btn" onclick="appendChar('1')">1</button>
+            <button class="btn" onclick="appendChar('2')">2</button>
+            <button class="btn" onclick="appendChar('3')">3</button>
+            <button class="btn operator" onclick="appendChar('*')">*</button>
+
+            <!-- 第 4 行 -->
+            <button class="btn" onclick="appendChar('0')">0</button>
+            <button class="btn" onclick="appendChar('.')">.</button>
+            <button class="btn equal" onclick="calculate()">=</button>
+            <button class="btn operator" onclick="appendChar('/')">/</button>
+        </div>
+        
+        <div class="instructions">
+            <small>双击输入框清空 | 按 'C' 清空 | Enter 计算</small>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

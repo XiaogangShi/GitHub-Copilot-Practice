@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>键盘指法练习器</title>
+    <style>
+        /*
+         * CSS 样式部分
+         * 用于设置页面的整体布局和字母的显示效果
+         */
+        body {
+            margin: 0;
+            overflow: hidden; /* 防止滚动条出现 */
+            background-color: #000; /* 页面背景色为黑色 */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff; /* 默认文本颜色，主要用于提示信息 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* 页面高度占满视口 */
+            cursor: default; /* 鼠标样式 */
+        }
+
+        #game-container {
+            position: relative; /* 游戏容器相对定位，方便字母绝对定位 */
+            width: 100vw; /* 宽度占满视口 */
+            height: 100vh; /* 高度占满视口 */
+            overflow: hidden; /* 确保字母超出容器时被裁剪 */
+            display: none; /* 初始隐藏，等待游戏开始 */
+        }
+
+        .falling-letter {
+            position: absolute; /* 字母绝对定位 */
+            font-size: 8em; /* 字母大小，根据需求调整为 8em (约 128px) */
+            font-weight: bold; /* 加粗 */
+            pointer-events: none; /* 阻止字母捕获鼠标事件，让点击穿透到游戏容器 */
+            white-space: nowrap; /* 防止字母换行 */
+            user-select: none; /* 禁止选中字母文本 */
+            top: 0; /* 初始位置在顶部，所有垂直移动通过 transform: translateY 实现 */
+            left: 0; /* 初始位置在0，通过JS调整 */
+            transform: translateY(-100%); /* 初始隐藏在屏幕上方，等待JS调整 */
+            /* 默认过渡，在字母消失时会被覆盖 */
+            transition: none;
+            z-index: 10; /* 确保字母在计分系统之上 */
+        }
+
+        #score-display {
+            position: absolute; /* 计分系统绝对定位 */
+            bottom: 20px; /* 距离底部20px */
+            left: 20px; /* 距离左边20px */
+            font-size: 1.8em; /* 字体大小 */
+            color: #00ff00; /* 默认绿色字体 */
+            z-index: 20; /* 确保在最顶层 */
+            background-color: rgba(0, 0, 0, 0.5); /* 半透明背景，增加可读性 */
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            min-width: 120px; /* 确保显示稳定 */
+            text-align: center;
+        }
+
+        /* 开始/暂停屏幕样式 */
+        .overlay-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 2.5em;
+            text-align: center;
+            z-index: 100; /* 确保在最顶层 */
+            line-height: 1.5; /* 行高 */
+        }
+
+        .overlay-screen p {
+            margin: 10px 0;
+            padding: 0;
+        }
+
+        .small-text {
+            font-size: 0.6em;
+            color: #aaa;
+        }
+
+        #pause-screen {
+            display: none; /* 初始隐藏 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 开始屏幕：游戏启动时显示，提示用户按Enter键 -->
+    <div id="start-screen" class="overlay-screen">
+        <p>键盘指法练习器</p>
+        <p class="small-text">HubX Gemini 作品</p>
+        <p>请按 <span style="color:#00ff00; font-weight: bold;">Enter</span> 键开始游戏</p>
+        <p class="small-text">(首次按键可能需等待片刻，浏览器正在恢复音频)</p>
+    </div>
+
+    <!-- 游戏容器：字母下落区域和分数显示 -->
+    <div id="game-container">
+        <div id="score-display">分数: 0</div>
+    </div>
+
+    <!-- 暂停屏幕：游戏暂停时显示，提示用户按Esc键继续 -->
+    <div id="pause-screen" class="overlay-screen">
+        <p>游戏已暂停</p>
+        <p>按 <span style="color:#00ff00; font-weight: bold;">Esc</span> 键继续</p>
+    </div>
+
+    <script>
+        /*
+         * JavaScript 逻辑部分
+         * 实现游戏的核心功能：字母生成、移动、按键检测、计分、音效、开始/暂停机制和动态难度调整
+         */
+
+        // 获取 DOM 元素
+        const gameContainer = document.getElementById('game-container');
+        const scoreDisplay = document.getElementById('score-display');
+        const startScreen = document.getElementById('start-screen');
+        const pauseScreen = document.getElementById('pause-screen');
+
+        // 游戏状态枚举，定义了游戏可能处于的三种状态
+        const GameState = {
+            START: 'start',    // 初始界面，等待开始
+            PLAYING: 'playing',// 游戏进行中
+            PAUSED: 'paused'   // 游戏暂停
+        };
+        let currentGameState = GameState.START; // 游戏初始状态
+
+        // 核心游戏数据
+        let score = 0; // 当前玩家分数
+        let fallingLetters = []; // 存储所有正在下落的字母对象数组
+        let letterIdCounter = 0; // 用于为每个字母分配唯一ID
+
+        // 游戏参数配置
+        const MAX_LETTERS = 10; // 屏幕上同时存在的字母最大数量
+
+        // 难度参数 - 基于分数门限进行速度调整
+        const BASE_FALL_DURATION_MS = 8000; // 字母从顶到底初始所需时间（毫秒），即难度0时的持续时间
+        const MIN_FALL_DURATION_MS = 1500; // 字母下落的最快时间，防止速度无限快
+        const MAX_FALL_DURATION_MS = BASE_FALL_DURATION_MS * 3; // 字母下落的最慢时间，防止速度无限慢
+        const DIFFICULTY_THRESHOLD_POINTS = 30; // 每达到此分数门槛，难度增加一层
+        const SPEED_FACTOR_PER_THRESHOLD = 1.5; // 每过一个门槛，速度提高 SPEED_FACTOR_PER_THRESHOLD 倍 (即持续时间变为 1 / SPEED_FACTOR_PER_THRESHOLD 倍)
+
+        // 难度参数 - 基于时间进行生成频率调整
+        const INITIAL_GENERATION_INTERVAL_MS = 1500; // 初始字母生成间隔（毫秒）
+        const MIN_GENERATION_INTERVAL_MS = 300; // 最快字母生成间隔
+        const GENERATION_INTERVAL_DECAY_FACTOR = 0.9999; // 每帧生成间隔会稍微衰减，使其随时间逐渐加快 (值越接近1衰减越慢)
+
+        // 游戏运行计时器
+        let currentFallDuration = BASE_FALL_DURATION_MS; // 当前字母下落时间 (由分数决定)
+        let currentGenerationInterval = INITIAL_GENERATION_INTERVAL_MS; // 当前字母生成间隔 (由时间决定)
+        let lastGenerationTime = 0; // 上次生成字母的时间戳
+        let lastFrameTime = 0; // 上次动画帧的时间戳
+        let animationFrameId; // 用于存储 requestAnimationFrame 的ID，以便暂停/取消
+
+        // Web Audio API 用于生成音效
+        let audioContext;
+        function initAudio() {
+            try {
+                // 创建 AudioContext，初始可能处于 'suspended' 状态
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                // console.log("AudioContext created, initial state:", audioContext.state);
+            } catch (e) {
+                console.warn('Web Audio API 不可用。无法播放音效。', e);
+            }
+        }
+
+        /**
+         * 播放一个简单的短促蜂鸣声 (Web Audio API)
+         * @param {number} frequency 音调频率
+         * @param {number} duration 音调持续时间 (秒)
+         * @param {number} volume 音量 (0-1)
+         */
+        function playTone(frequency, duration, volume) {
+            // 只有当 AudioContext 存在且处于 'running' 状态时才播放
+            if (!audioContext || audioContext.state !== 'running') {
+                // console.log("AudioContext not running, cannot play tone.");
+                return;
+            }
+
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.type = 'sine'; // 正弦波，听起来比较柔和
+            oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+            gainNode.gain.setValueAtTime(volume, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration); // 快速淡出
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + duration);
+        }
+
+        /** 按键成功消除字母时的音效 */
+        function playSuccessSound() {
+            playTone(1000, 0.1, 0.4); // 较高的音调，更短促，音量略大
+        }
+
+        /** 字母触底错失时的音效 */
+        function playMissSound() {
+            playTone(180, 0.2, 0.6); // 较低沉的音调，持续时间更长，音量更大
+        }
+
+        /**
+         * 生成一个随机的大写字母 (A-Z)
+         * @returns {string} 随机字母
+         */
+        function getRandomChar() {
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            return chars[Math.floor(Math.random() * chars.length)];
+        }
+
+        /**
+         * 生成一个随机的亮色，确保在黑色背景上可见
+         * @returns {string} CSS颜色字符串 (例如 'rgb(R,G,B)')
+         */
+        function getRandomBrightColor() {
+            // 确保颜色是亮的，R, G, B至少有一个分量较高，且整体亮度足够
+            const r = Math.floor(Math.random() * 150) + 100; // 100-250
+            const g = Math.floor(Math.random() * 150) + 100;
+            const b = Math.floor(Math.random() * 150) + 100;
+            return `rgb(${r},${g},${b})`;
+        }
+
+        /**
+         * 创建并返回一个字母的 DOM 元素
+         * @param {string} char 字母字符
+         * @param {string} color 字母颜色
+         * @param {number} left 字母的初始水平位置 (px)
+         * @returns {HTMLElement} 字母的 div 元素
+         */
+        function createLetterElement(char, color, left) {
+            const letterEl = document.createElement('div');
+            letterEl.classList.add('falling-letter'); // 添加CSS类，应用字体样式
+            letterEl.textContent = char; // 设置字母内容
+            letterEl.style.color = color; // 设置随机颜色
+            letterEl.style.left = `${left}px`; // 设置初始水平位置
+            // 初始完全隐藏在屏幕上方，由 JS 控制 translateY 移动
+            letterEl.style.transform = 'translateY(-100%)';
+            gameContainer.appendChild(letterEl); // 将字母添加到游戏容器中
+            return letterEl;
+        }
+
+        /**
+         * 生成一个新的下落字母，并添加到 fallingLetters 数组中
+         */
+        function generateLetter() {
+            if (fallingLetters.length >= MAX_LETTERS) {
+                // 如果屏幕上的字母数量达到上限，则暂时不生成新字母
+                return;
+            }
+
+            const char = getRandomChar(); // 获取随机字母
+            const color = getRandomBrightColor(); // 获取随机亮色
+            // 随机水平位置，确保字母不会超出屏幕边界
+            const gameWidth = gameContainer.offsetWidth;
+            const letterWidthEstimate = 120; // 估算字母宽度 (基于 8em font-size)，防止生成位置过近边缘
+            const left = Math.random() * (gameWidth - letterWidthEstimate);
+
+            const letterEl = createLetterElement(char, color, left);
+            letterIdCounter++; // 增加ID计数器
+
+            // 计算该字母在当前难度下的像素速度 (像素/毫秒)
+            const gameHeight = gameContainer.offsetHeight;
+            // 字母需要从顶部完全移出屏幕上方到完全移出屏幕下方。
+            const totalTravelDistance = gameHeight + letterEl.offsetHeight; // 字母从-letter.height到gameHeight走过的距离
+            // 速度 = 总距离 / 当前下落持续时间
+            const speed = totalTravelDistance / currentFallDuration; // 像素/毫秒
+
+            fallingLetters.push({
+                element: letterEl,      // 字母的 DOM 元素
+                char: char,             // 字母字符本身
+                id: letterIdCounter,    // 唯一ID
+                speedY: speed,          // 该字母自身的垂直下落速度 (像素/毫秒)
+                currentY: -letterEl.offsetHeight, // 字母当前在屏幕上的垂直位置 (负值表示在屏幕上方)
+                isDisappearing: false,  // 标记字母是否正在执行消失动画
+                hasTriggeredRebound: false // 标记字母是否已经触发过触底反弹逻辑
+            });
+            // 初始设置 transform 避免字母刚出现时的闪烁
+            letterEl.style.transform = `translateY(${fallingLetters[fallingLetters.length-1].currentY}px)`;
+        }
+
+        /**
+         * 将指定索引的字母从 DOM 和 fallingLetters 数组中移除
+         * @param {number} index 要移除的字母在 fallingLetters 数组中的索引
+         */
+        function cleanupLetter(index) {
+            const letter = fallingLetters[index];
+            if (letter && letter.element && letter.element.parentNode) {
+                letter.element.remove();
+            }
+            fallingLetters.splice(index, 1);
+        }
+
+        /**
+         * 键盘消除时的字母特效：快速缩小、旋转并淡出
+         * @param {HTMLElement} element 字母的DOM元素
+         * @param {number} currentLetterY 字母当前精确的Y坐标
+         * @param {number} index 字母在 fallingLetters 数组中的索引
+         */
+        function keyboardShatterEffect(element, currentLetterY, index) {
+            playSuccessSound(); // 播放成功消除音效
+            element.style.transition = 'transform 0.25s ease-out, opacity 0.25s ease-out';
+            // 在现有 translateY 基础上叠加缩放旋转，模拟碎裂效果
+            element.style.transform = `translateY(${currentLetterY}px) scale(0.1) rotate(90deg)`;
+            element.style.opacity = '0';
+
+            setTimeout(() => {
+                cleanupLetter(index);
+            }, 250); // 0.25秒后彻底移除
+        }
+
+        /**
+         * 触底消失时的字母特效：先反弹，再缩小、旋转并淡出
+         * @param {object} letter 字母对象
+         * @param {number} index 字母在 fallingLetters 数组中的索引
+         */
+        function reboundShatterEffect(letter, index) {
+            playMissSound(); // 播放触底音效
+            letter.isDisappearing = true; // 标记为正在消失，阻止 gameLoop 继续更新其位置
+            letter.hasTriggeredRebound = true; // 标记已触发反弹
+
+            // Phase 1: 向上反弹动画
+            const reboundHeight = 50; // 向上反弹 50 像素
+            letter.element.style.transition = 'transform 0.15s ease-out'; // 反弹动画持续 0.15 秒
+            // 从当前触底位置向上移动
+            letter.element.style.transform = `translateY(${letter.currentY - reboundHeight}px)`;
+
+            setTimeout(() => {
+                // Phase 2: 向下碎裂消失动画
+                letter.element.style.transition = 'transform 0.25s ease-in, opacity 0.25s ease-in'; // 碎裂动画持续 0.25 秒
+                // 字母从反弹顶点开始向下坠落，同时缩小旋转并淡出
+                letter.element.style.transform = `translateY(${letter.currentY + reboundHeight}px) scale(0.1) rotate(90deg)`;
+                letter.element.style.opacity = '0';
+            }, 150); // 在反弹动画结束后 (0.15秒) 触发碎裂动画
+
+            setTimeout(() => {
+                cleanupLetter(index); // 总动画时间：0.15秒 (反弹) + 0.25秒 (碎裂) = 0.4秒后彻底移除
+            }, 400);
+        }
+
+
+        /**
+         * 更新所有下落字母的位置，并处理字母触底逻辑
+         * @param {number} deltaTime 自上次更新以来的时间 (毫秒)
+         */
+        function updateLetters(deltaTime) {
+            const gameHeight = gameContainer.offsetHeight; // 游戏容器高度
+
+            for (let i = fallingLetters.length - 1; i >= 0; i--) {
+                const letter = fallingLetters[i];
+
+                if (letter.isDisappearing) {
+                    continue; // 如果字母正在消失，则跳过位置更新
+                }
+
+                // 更新字母的Y轴位置
+                letter.currentY += letter.speedY * deltaTime;
+                letter.element.style.transform = `translateY(${letter.currentY}px)`;
+
+                // 检查字母的底部是否已触碰到屏幕底部，并且尚未触发反弹
+                if (letter.currentY + letter.element.offsetHeight >= gameHeight && !letter.hasTriggeredRebound) {
+                    // 精确地将字母定位在屏幕底部（确保完整的字母可见）
+                    letter.currentY = gameHeight - letter.element.offsetHeight;
+                    letter.element.style.transform = `translateY(${letter.currentY}px)`;
+
+                    score--; // 字母触底，分数减1
+                    updateScoreDisplay(); // 更新分数显示
+                    adjustDifficulty(); // 重新评估难度 (因为分数变了)
+                    reboundShatterEffect(letter, i); // 播放触底反弹碎裂特效并移除
+                }
+            }
+        }
+
+        /**
+         * 更新分数显示，并根据分数高低改变颜色
+         */
+        function updateScoreDisplay() {
+            scoreDisplay.textContent = `分数: ${score}`;
+            if (score < 0) {
+                scoreDisplay.style.color = '#ff0000'; // 分数小于0显示红色
+            } else if (score === 0) {
+                scoreDisplay.style.color = '#ffff00'; // 分数等于0显示黄色
+            }
+            else {
+                scoreDisplay.style.color = '#00ff00'; // 分数大于0显示绿色
+            }
+        }
+
+        /**
+         * 动态调整游戏难度，主要影响新生成字母的下落速度
+         * 难度根据分数门槛 (每30分) 进行调整
+         */
+        function adjustDifficulty() {
+            // 计算当前难度等级：跨过了多少个 DIFFICULTY_THRESHOLD_POINTS 门槛
+            // 例如：score 0-29 -> level 0; score 30-59 -> level 1; score -1 ~ -30 -> level -1
+            let difficultyLevel;
+            if (score >= 0) {
+                difficultyLevel = Math.floor(score / DIFFICULTY_THRESHOLD_POINTS);
+            } else {
+                // 对于负分数，例如 -1到-30 都是 -1 级，-31到-60 是 -2 级
+                difficultyLevel = Math.ceil(score / DIFFICULTY_THRESHOLD_POINTS);
+            }
+
+            // 根据难度等级计算新的下落持续时间 (影响速度)
+            let newFallDuration;
+            if (difficultyLevel >= 0) {
+                // 正难度等级（分数增加），速度加快，持续时间变短
+                newFallDuration = BASE_FALL_DURATION_MS / Math.pow(SPEED_FACTOR_PER_THRESHOLD, difficultyLevel);
+            } else {
+                // 负难度等级（分数减少），速度减慢，持续时间变长
+                newFallDuration = BASE_FALL_DURATION_MS * Math.pow(SPEED_FACTOR_PER_THRESHOLD, -difficultyLevel);
+            }
+
+            // 限制下落持续时间在最小值和最大值之间，防止速度过快或过慢
+            currentFallDuration = Math.min(Math.max(MIN_FALL_DURATION_MS, newFallDuration), MAX_FALL_DURATION_MS);
+
+            // console.log(`分数: ${score}, 难度等级: ${difficultyLevel}, 新下落时间: ${currentFallDuration.toFixed(0)}ms`);
+        }
+
+        /**
+         * 游戏主循环，使用 requestAnimationFrame 实现平滑动画
+         * 负责字母生成、移动和状态更新
+         * @param {number} currentTime 当前时间戳 (毫秒)
+         */
+        function gameLoop(currentTime) {
+            // 如果游戏不在 PLAYING 状态，则不执行核心游戏逻辑，但仍继续请求下一帧，
+            // 以便在暂停或开始界面时也能响应按键（如Esc或Enter）
+            if (currentGameState !== GameState.PLAYING) {
+                lastFrameTime = currentTime; // 重置 lastFrameTime，避免恢复游戏时 deltaTime 过大导致字母瞬移
+                animationFrameId = requestAnimationFrame(gameLoop);
+                return;
+            }
+
+            // 初始化或更新 lastFrameTime
+            if (!lastFrameTime) {
+                lastFrameTime = currentTime;
+            }
+            const deltaTime = currentTime - lastFrameTime; // 计算自上次帧以来的时间间隔
+
+            // 动态调整字母生成间隔 (随游戏时间逐渐加快)
+            currentGenerationInterval = Math.max(
+                MIN_GENERATION_INTERVAL_MS,
+                currentGenerationInterval * GENERATION_INTERVAL_DECAY_FACTOR
+            );
+
+            // 根据当前生成间隔生成新字母
+            if (currentTime - lastGenerationTime > currentGenerationInterval) {
+                generateLetter();
+                lastGenerationTime = currentTime; // 更新上次生成时间
+            }
+
+            // 更新所有字母的位置
+            updateLetters(deltaTime);
+
+            lastFrameTime = currentTime; // 更新上次帧时间
+            animationFrameId = requestAnimationFrame(gameLoop); // 请求下一帧动画
+        }
+
+        /**
+         * 处理全局键盘按键事件，用于管理游戏状态 (开始、暂停、继续) 和游戏中的字母消除
+         * @param {KeyboardEvent} event 键盘事件对象
+         */
+        function globalKeyPressHandler(event) {
+            // 尝试在第一次用户交互时恢复 AudioContext
+            if (audioContext && audioContext.state === 'suspended') {
+                audioContext.resume().then(() => {
+                    // console.log('AudioContext resumed successfully!');
+                }).catch(e => {
+                    console.error("Failed to resume AudioContext:", e);
+                });
+            }
+
+            if (currentGameState === GameState.START) {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // 阻止默认的Enter键行为
+                    startGame(); // 启动游戏
+                }
+            } else if (currentGameState === GameState.PLAYING) {
+                if (event.key === 'Escape') {
+                    event.preventDefault(); // 阻止默认的Esc键行为
+                    pauseGame(); // 暂停游戏
+                } else {
+                    handleGameKeyPress(event); // 处理游戏中的字母消除按键
+                }
+            } else if (currentGameState === GameState.PAUSED) {
+                if (event.key === 'Escape') {
+                    event.preventDefault(); // 阻止默认的Esc键行为
+                    resumeGame(); // 恢复游戏
+                }
+            }
+        }
+
+        /**
+         * 处理游戏进行中的按键逻辑 (查找并消除匹配的字母)
+         * @param {KeyboardEvent} event 键盘事件对象
+         */
+        function handleGameKeyPress(event) {
+            const pressedChar = event.key.toUpperCase(); // 获取按下的键，并转换为大写
+
+            let matchedLetterIndex = -1; // 匹配到的字母在 fallingLetters 数组中的索引
+            let closestToBottomY = -Infinity; // 用于寻找最接近底部的字母的Y坐标
+
+            // 遍历所有下落中的字母，查找匹配项
+            for (let i = 0; i < fallingLetters.length; i++) {
+                const letter = fallingLetters[i];
+                // 只有未在消失动画中的字母才能被匹配
+                if (!letter.isDisappearing && letter.char === pressedChar) {
+                    // 如果有多个相同字母，优先消除最接近底部的那个 (即屏幕上Y坐标最大的)
+                    if (letter.currentY > closestToBottomY) {
+                        closestToBottomY = letter.currentY;
+                        matchedLetterIndex = i;
+                    }
+                }
+            }
+
+            if (matchedLetterIndex !== -1) {
+                // 找到了匹配的字母
+                const letterToRemove = fallingLetters[matchedLetterIndex];
+                letterToRemove.isDisappearing = true; // 标记为正在消失
+
+                score++; // 分数加1
+                updateScoreDisplay(); // 更新分数显示
+                adjustDifficulty(); // 重新评估难度 (因为分数变了)
+                keyboardShatterEffect(letterToRemove.element, letterToRemove.currentY, matchedLetterIndex); // 播放键盘消除特效
+            }
+        }
+
+        /**
+         * 启动游戏。隐藏开始屏幕，显示游戏容器，并重置所有游戏参数。
+         */
+        function startGame() {
+            startScreen.style.display = 'none'; // 隐藏开始屏幕
+            gameContainer.style.display = 'block'; // 显示游戏容器
+            currentGameState = GameState.PLAYING; // 设置游戏状态为进行中
+
+            // 重置所有游戏数据
+            score = 0;
+            // 清空所有下落中的字母元素
+            fallingLetters.forEach(letter => {
+                if (letter.element && letter.element.parentNode) {
+                    letter.element.remove();
+                }
+            });
+            fallingLetters = [];
+            letterIdCounter = 0;
+            currentFallDuration = BASE_FALL_DURATION_MS; // 恢复初始下落速度
+            currentGenerationInterval = INITIAL_GENERATION_INTERVAL_MS; // 恢复初始生成间隔
+            lastGenerationTime = 0;
+
+            updateScoreDisplay(); // 更新分数显示
+            // 确保游戏循环已启动或重新启动
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId); // 取消旧的循环 (如果存在)
+            }
+            animationFrameId = requestAnimationFrame(gameLoop);
+            console.log('游戏开始！');
+        }
+
+        /**
+         * 暂停游戏。显示暂停屏幕，但游戏循环依然运行，只是不更新游戏逻辑。
+         */
+        function pauseGame() {
+            currentGameState = GameState.PAUSED;
+            pauseScreen.style.display = 'flex'; // 显示暂停屏幕
+            console.log('游戏暂停。');
+        }
+
+        /**
+         * 继续游戏。隐藏暂停屏幕，游戏逻辑恢复更新。
+         */
+        function resumeGame() {
+            currentGameState = GameState.PLAYING;
+            pauseScreen.style.display = 'none'; // 隐藏暂停屏幕
+            // 恢复游戏时重置 lastFrameTime，防止 deltaTime 过大导致字母瞬移
+            lastFrameTime = performance.now();
+            console.log('游戏继续。');
+        }
+
+        /**
+         * 页面加载完成后，进行游戏初始化设置
+         */
+        function initGame() {
+            initAudio(); // 初始化音效系统
+            document.addEventListener('keydown', globalKeyPressHandler); // 监听全局键盘按键事件
+            updateScoreDisplay(); // 初始化分数显示
+            // 启动初始游戏循环，此时 gameLoop 会在 START 状态下运行，只监听 Enter 键
+            animationFrameId = requestAnimationFrame(gameLoop);
+            console.log('游戏已加载，等待开始。');
+        }
+
+        // 绑定页面加载事件，确保所有DOM元素都已加载完毕
+        window.onload = initGame;
+    </script>
+</body>
+</html>
+
+

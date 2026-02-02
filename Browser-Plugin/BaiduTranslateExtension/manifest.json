@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "百度翻译右键菜单",
+  "version": "1.0",
+  "description": "在右键菜单中添加一个选项，点击后打开百度翻译页面。",
+  "permissions": ["contextMenus"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

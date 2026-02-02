@@ -1,0 +1,241 @@
+  PID TTY           TIME CMD
+84460 ttys003    0:04.35 -zsh
+85674 ttys007    0:00.88 /bin/zsh -i
+ 1580 ttys008    0:00.32 -zsh
+63759 ttys012    0:12.43 -zsh
+64486 ttys013    0:00.33 -zsh
+68666 ttys014    0:00.77 -zsh
+85748 ttys015    0:01.91 /bin/zsh -il
+  PID TTY           TIME CMD
+  814 ttys000    0:01.77 -zsh
+ 1561 ttys001    0:01.05 -zsh
+12413 ttys001    0:00.01 /bin/bash ./start-studio.sh
+12465 ttys001    0:00.03 /Library/Developer/CommandLineTools/usr/bin/make run
+12522 ttys001    0:08.01 bin/studio
+12534 ttys001    0:00.21 npm run dev   
+12553 ttys001   22:07.90 node /Users/mac/xgshi/code/GitHub-Copilot-Practice/NebulaGraphStudio/nebula-studio/node_modules/.bin/vite
+12554 ttys001    0:06.12 /Users/mac/xgshi/code/GitHub-Copilot-Practice/NebulaGraphStudio/nebula-studio/node_modules/@esbuild/darwin-x64/bin/esbuild --service=0.27.2 --ping
+37279 ttys005    0:00.35 /bin/zsh -il
+37696 ttys006    0:00.81 /bin/zsh -i
+37733 ttys008    0:04.57 /bin/zsh -il
+24625 ttys013    0:01.37 -zsh
+32698 ttys015    0:01.93 -zsh
+  PID TTY           TIME CMD
+  814 ttys000    0:01.77 -zsh
+ 1561 ttys001    0:01.05 -zsh
+12413 ttys001    0:00.01 /bin/bash ./start-studio.sh
+12465 ttys001    0:00.03 /Library/Developer/CommandLineTools/usr/bin/make run
+12522 ttys001    0:08.05 bin/studio
+12534 ttys001    0:00.21 npm run dev   
+12553 ttys001   22:14.42 node /Users/mac/xgshi/code/GitHub-Copilot-Practice/NebulaGraphStudio/nebula-studio/node_modules/.bin/vite
+12554 ttys001    0:06.16 /Users/mac/xgshi/code/GitHub-Copilot-Practice/NebulaGraphStudio/nebula-studio/node_modules/@esbuild/darwin-x64/bin/esbuild --service=0.27.2 --ping
+37279 ttys005    0:00.35 /bin/zsh -il
+37696 ttys006    0:00.81 /bin/zsh -i
+37733 ttys008    0:04.57 /bin/zsh -il
+24625 ttys013    0:01.37 -zsh
+32698 ttys015    0:01.93 -zsh
+  PID TTY           TIME CMD
+  814 ttys000    0:01.78 -zsh
+ 1561 ttys001    0:01.53 -zsh
+37279 ttys005    0:00.36 /bin/zsh -il
+37696 ttys006    0:00.81 /bin/zsh -i
+37733 ttys008    0:07.00 /bin/zsh -il
+63012 ttys010    0:00.48 /bin/zsh -il
+63673 ttys010    0:00.01 /bin/bash ./start-studio.sh
+63749 ttys010    0:00.03 /Library/Developer/CommandLineTools/usr/bin/make run
+63803 ttys010    0:25.72 bin/studio
+63821 ttys010    0:00.27 npm run dev   
+63845 ttys010   48:56.09 node /Users/mac/xgshi/code/GitHub-Copilot-Practice/NebulaGraphStudio/nebula-studio/node_modules/.bin/vite
+63846 ttys010    0:15.82 /Users/mac/xgshi/code/GitHub-Copilot-Practice/NebulaGraphStudio/nebula-studio/node_modules/@esbuild/darwin-x64/bin/esbuild --service=0.27.2 --ping
+24625 ttys013    0:01.38 -zsh
+32698 ttys015    0:01.94 -zsh
+  PID TTY           TIME CMD
+  814 ttys000    0:01.79 -zsh
+ 1561 ttys001    0:01.60 -zsh
+37279 ttys005    0:00.37 /bin/zsh -il
+37696 ttys006    0:00.81 /bin/zsh -i
+37733 ttys008    0:07.01 /bin/zsh -il
+63012 ttys010    0:00.48 /bin/zsh -il
+63673 ttys010    0:00.01 /bin/bash ./start-studio.sh
+63749 ttys010    0:00.03 /Library/Developer/CommandLineTools/usr/bin/make run
+63803 ttys010    1:03.64 bin/studio
+63821 ttys010    0:00.27 npm run dev   
+63845 ttys010  122:26.83 node /Users/mac/xgshi/code/GitHub-Copilot-Practice/NebulaGraphStudio/nebula-studio/node_modules/.bin/vite
+63846 ttys010    0:39.05 /Users/mac/xgshi/code/GitHub-Copilot-Practice/NebulaGraphStudio/nebula-studio/node_modules/@esbuild/darwin-x64/bin/esbuild --service=0.27.2 --ping
+63900 ttys011    0:01.18 -zsh
+24625 ttys013    0:01.40 -zsh
+65162 ttys014    0:01.06 /bin/zsh -i
+32698 ttys015    0:02.40 -zsh
+66111 ttys017    0:01.94 /bin/zsh -il
+80044 ttys019    0:00.54 /bin/zsh -il
+89484 ttys021    0:00.94 /bin/zsh -i
+89743 ttys023    0:01.13 /bin/zsh -il
+93256 ttys026    0:01.18 /bin/zsh -i
+14771 ttys028    0:03.06 /bin/zsh -il
+28596 ttys030    0:00.78 /bin/zsh -il
+  PID TTY           TIME CMD
+  814 ttys000    0:01.79 -zsh
+ 1561 ttys001    0:01.60 -zsh
+37279 ttys005    0:00.37 /bin/zsh -il
+37696 ttys006    0:00.81 /bin/zsh -i
+37733 ttys008    0:07.01 /bin/zsh -il
+63012 ttys010    0:00.48 /bin/zsh -il
+63673 ttys010    0:00.01 /bin/bash ./start-studio.sh
+63749 ttys010    0:00.03 /Library/Developer/CommandLineTools/usr/bin/make run
+63803 ttys010    1:03.68 bin/studio
+63821 ttys010    0:00.27 npm run dev   
+63845 ttys010  122:31.30 node /Users/mac/xgshi/code/GitHub-Copilot-Practice/NebulaGraphStudio/nebula-studio/node_modules/.bin/vite
+63846 ttys010    0:39.07 /Users/mac/xgshi/code/GitHub-Copilot-Practice/NebulaGraphStudio/nebula-studio/node_modules/@esbuild/darwin-x64/bin/esbuild --service=0.27.2 --ping
+63900 ttys011    0:01.18 -zsh
+24625 ttys013    0:01.40 -zsh
+65162 ttys014    0:01.06 /bin/zsh -i
+32698 ttys015    0:02.40 -zsh
+66111 ttys017    0:01.94 /bin/zsh -il
+80044 ttys019    0:00.54 /bin/zsh -il
+89484 ttys021    0:00.94 /bin/zsh -i
+89743 ttys023    0:01.13 /bin/zsh -il
+93256 ttys026    0:01.18 /bin/zsh -i
+14771 ttys028    0:03.06 /bin/zsh -il
+28596 ttys030    0:00.78 /bin/zsh -il
+  PID TTY           TIME CMD
+  814 ttys000    0:01.87 -zsh
+ 1561 ttys001    0:01.68 -zsh
+37279 ttys005    0:00.38 /bin/zsh -il
+37696 ttys006    0:00.81 /bin/zsh -i
+37733 ttys008    0:07.01 /bin/zsh -il
+63012 ttys010    0:00.48 /bin/zsh -il
+63673 ttys010    0:00.01 /bin/bash ./start-studio.sh
+63749 ttys010    0:00.03 /Library/Developer/CommandLineTools/usr/bin/make run
+63803 ttys010    1:47.83 bin/studio
+63821 ttys010    0:00.32 npm run dev   
+63845 ttys010  204:54.67 node /Users/mac/xgshi/code/GitHub-Copilot-Practice/NebulaGraphStudio/nebula-studio/node_modules/.bin/vite
+63846 ttys010    1:07.16 /Users/mac/xgshi/code/GitHub-Copilot-Practice/NebulaGraphStudio/nebula-studio/node_modules/@esbuild/darwin-x64/bin/esbuild --service=0.27.2 --ping
+63900 ttys011    0:01.25 -zsh
+24625 ttys013    0:01.46 -zsh
+32698 ttys015    0:02.91 -zsh
+72319 ttys035    0:01.87 -zsh
+28473 ttys046    0:04.33 -zsh
+  PID TTY           TIME CMD
+  814 ttys000    0:01.87 -zsh
+ 1561 ttys001    0:01.68 -zsh
+37279 ttys005    0:00.38 /bin/zsh -il
+37696 ttys006    0:00.81 /bin/zsh -i
+37733 ttys008    0:07.01 /bin/zsh -il
+63012 ttys010    0:00.48 /bin/zsh -il
+63673 ttys010    0:00.01 /bin/bash ./start-studio.sh
+63749 ttys010    0:00.03 /Library/Developer/CommandLineTools/usr/bin/make run
+63803 ttys010    1:47.87 bin/studio
+63821 ttys010    0:00.32 npm run dev   
+63845 ttys010  204:59.02 node /Users/mac/xgshi/code/GitHub-Copilot-Practice/NebulaGraphStudio/nebula-studio/node_modules/.bin/vite
+63846 ttys010    1:07.18 /Users/mac/xgshi/code/GitHub-Copilot-Practice/NebulaGraphStudio/nebula-studio/node_modules/@esbuild/darwin-x64/bin/esbuild --service=0.27.2 --ping
+63900 ttys011    0:01.25 -zsh
+24625 ttys013    0:01.46 -zsh
+32698 ttys015    0:02.91 -zsh
+72319 ttys035    0:01.87 -zsh
+28473 ttys046    0:04.33 -zsh
+  PID TTY           TIME CMD
+  814 ttys000    0:01.88 -zsh
+ 1561 ttys001    0:01.69 -zsh
+53085 ttys010    0:01.07 -zsh
+45189 ttys011    0:00.31 /Library/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python image_server.py
+45198 ttys011    0:00.07 /Library/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python -c from multiprocessing.resource_tracker import main;main(6)
+45199 ttys011    0:27.03 /Library/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python image_server.py
+45200 ttys011    0:00.07 /Library/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python -c from multiprocessing.resource_tracker import main;main(8)
+63900 ttys011    0:01.94 -zsh
+24625 ttys013    0:01.48 -zsh
+32698 ttys015    0:02.92 -zsh
+54261 ttys021    0:00.94 /bin/zsh -i
+44424 ttys032    0:00.07 /bin/zsh -il
+72319 ttys035    0:01.88 -zsh
+28473 ttys046    0:04.34 -zsh
+  PID TTY           TIME CMD
+  814 ttys000    0:01.88 -zsh
+ 1561 ttys001    0:01.69 -zsh
+53085 ttys010    0:01.07 -zsh
+45189 ttys011    0:00.31 /Library/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python image_server.py
+45198 ttys011    0:00.07 /Library/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python -c from multiprocessing.resource_tracker import main;main(6)
+45199 ttys011    0:27.16 /Library/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python image_server.py
+45200 ttys011    0:00.07 /Library/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python -c from multiprocessing.resource_tracker import main;main(8)
+63900 ttys011    0:01.94 -zsh
+24625 ttys013    0:01.48 -zsh
+32698 ttys015    0:02.92 -zsh
+54261 ttys021    0:00.94 /bin/zsh -i
+44424 ttys032    0:00.07 /bin/zsh -il
+72319 ttys035    0:01.88 -zsh
+28473 ttys046    0:04.34 -zsh
+  PID TTY           TIME CMD
+  814 ttys000    0:01.92 -zsh
+ 1561 ttys001    0:01.72 -zsh
+78051 ttys005    0:01.30 -zsh
+53085 ttys010    0:01.30 -zsh
+63900 ttys011    0:04.56 -zsh
+24625 ttys013    0:01.51 -zsh
+32698 ttys015    0:02.95 -zsh
+54261 ttys021    0:00.94 /bin/zsh -i
+44424 ttys032    0:00.07 /bin/zsh -il
+72319 ttys035    0:01.91 -zsh
+18431 ttys045    0:00.24 /bin/zsh -i
+28473 ttys046    0:04.36 -zsh
+27446 ttys047    0:02.62 -zsh
+31268 ttys047    0:04.97 /opt/miniconda3/envs/deepseek/bin/python3.13 /opt/miniconda3/envs/deepseek/bin/jupyter-lab
+28137 ttys051    0:00.33 /bin/zsh -il
+28204 ttys054    0:01.29 /bin/zsh -i
+31673 ttys055    0:00.47 -zsh
+  PID TTY           TIME CMD
+  814 ttys000    0:01.92 -zsh
+ 1561 ttys001    0:01.72 -zsh
+78051 ttys005    0:01.30 -zsh
+53085 ttys010    0:01.30 -zsh
+63900 ttys011    0:04.56 -zsh
+24625 ttys013    0:01.51 -zsh
+32698 ttys015    0:02.95 -zsh
+54261 ttys021    0:00.94 /bin/zsh -i
+44424 ttys032    0:00.07 /bin/zsh -il
+72319 ttys035    0:01.91 -zsh
+18431 ttys045    0:00.24 /bin/zsh -i
+28473 ttys046    0:04.36 -zsh
+27446 ttys047    0:02.62 -zsh
+31268 ttys047    0:04.98 /opt/miniconda3/envs/deepseek/bin/python3.13 /opt/miniconda3/envs/deepseek/bin/jupyter-lab
+28137 ttys051    0:00.33 /bin/zsh -il
+28204 ttys054    0:01.29 /bin/zsh -i
+31673 ttys055    0:00.47 -zsh
+  PID TTY           TIME CMD
+  814 ttys000    0:01.95 -zsh
+ 1561 ttys001    0:01.74 -zsh
+78051 ttys005    0:01.32 -zsh
+53085 ttys010    0:01.31 -zsh
+63900 ttys011    0:04.58 -zsh
+24625 ttys013    0:01.54 -zsh
+32698 ttys015    0:02.97 -zsh
+54261 ttys021    0:00.94 /bin/zsh -i
+44424 ttys032    0:00.07 /bin/zsh -il
+72319 ttys035    0:01.94 -zsh
+18431 ttys045    0:00.24 /bin/zsh -i
+28473 ttys046    0:04.38 -zsh
+27446 ttys047    0:03.02 -zsh
+46295 ttys047    0:23.02 /opt/miniconda3/envs/deepseek/bin/python3.13 /opt/miniconda3/envs/deepseek/bin/jupyter-lab
+28137 ttys051    0:00.43 /bin/zsh -il
+28204 ttys054    0:01.29 /bin/zsh -i
+31673 ttys055    0:00.59 -zsh
+62431 ttys056    0:00.96 -zsh
+73697 ttys058    0:00.78 -zsh
+  PID TTY           TIME CMD
+  814 ttys000    0:01.95 -zsh
+ 1561 ttys001    0:01.74 -zsh
+78051 ttys005    0:01.32 -zsh
+53085 ttys010    0:01.31 -zsh
+63900 ttys011    0:04.58 -zsh
+24625 ttys013    0:01.54 -zsh
+32698 ttys015    0:02.97 -zsh
+54261 ttys021    0:00.94 /bin/zsh -i
+44424 ttys032    0:00.07 /bin/zsh -il
+72319 ttys035    0:01.94 -zsh
+18431 ttys045    0:00.24 /bin/zsh -i
+28473 ttys046    0:04.38 -zsh
+27446 ttys047    0:03.02 -zsh
+46295 ttys047    0:23.03 /opt/miniconda3/envs/deepseek/bin/python3.13 /opt/miniconda3/envs/deepseek/bin/jupyter-lab
+28137 ttys051    0:00.43 /bin/zsh -il
+28204 ttys054    0:01.29 /bin/zsh -i
+31673 ttys055    0:00.59 -zsh
+62431 ttys056    0:00.96 -zsh
+73697 ttys058    0:00.78 -zsh

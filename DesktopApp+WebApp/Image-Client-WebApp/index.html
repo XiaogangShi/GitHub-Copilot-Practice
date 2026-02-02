@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图像搜索客户端</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 上部区域：控制栏 -->
+        <div class="top-section">
+            <div class="controls-row">
+                <label for="search-input" class="label-text">文件名</label>
+                <input type="text" id="search-input" placeholder="输入文件名..." autofocus>
+                <button id="search-btn">搜索</button>
+            </div>
+            <!-- 提示文本：第二行，左对齐 -->
+            <!-- 添加 style 确保在任何布局下都能换行并左对齐 -->
+            <div class="hint-row" style="width: 100%; text-align: left; margin-top: 5px;">
+                <small style="color: #666;">提示：在上方输入部分或者完整文件名后点击【搜索】或按回车。</small>
+            </div>
+        </div>
+
+        <!-- 下部区域：结果列表 + 预览 -->
+        <div class="bottom-section">
+            <div class="content-container">
+                <!-- 左侧：列表 (自适应宽度) -->
+                <div class="list-pane">
+                    <ul id="result-list">
+                        <!-- 搜索结果将在这里生成 -->
+                        <!-- 示例结构: <li data-url="...">📷 filename.jpg</li> -->
+                    </ul>
+                </div>
+
+                <!-- 右侧：预览 (占据剩余空间) -->
+                <div class="preview-pane">
+                    <div class="preview-content">
+                        <!-- 默认显示文字，加载图片后显示 img -->
+                        <span id="preview-text">预览</span>
+                        <img id="preview-img" src="" alt="缩略图预览" style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引用 JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

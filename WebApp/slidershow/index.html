@@ -1,0 +1,102 @@
+ <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web 轮播图 Demo</title>
+    <!-- 引入样式文件 -->
+    <link rel="stylesheet" href="slideshow.css">
+</head>
+<body>
+
+    <!-- 轮播图主容器 -->
+    <div class="carousel-container">
+
+        <!-- 轮播轨道：包含所有图片 -->
+        <div class="carousel-track">
+            <!-- 10张幻灯片，使用占位图模拟 -->
+            <div class="carousel-slide"><img src="https://placehold.co/800x600?text=Page+1" alt="Page 1"></div>
+            <div class="carousel-slide"><img src="https://placehold.co/800x600?text=Page+2" alt="Page 2"></div>
+            <div class="carousel-slide"><img src="https://placehold.co/800x600?text=Page+3" alt="Page 3"></div>
+            <div class="carousel-slide"><img src="https://placehold.co/800x600?text=Page+4" alt="Page 4"></div>
+            <div class="carousel-slide"><img src="https://placehold.co/800x600?text=Page+5" alt="Page 5"></div>
+            <div class="carousel-slide"><img src="https://placehold.co/800x600?text=Page+6" alt="Page 6"></div>
+            <div class="carousel-slide"><img src="https://placehold.co/800x600?text=Page+7" alt="Page 7"></div>
+            <div class="carousel-slide"><img src="https://placehold.co/800x600?text=Page+8" alt="Page 8"></div>
+            <div class="carousel-slide"><img src="https://placehold.co/800x600?text=Page+9" alt="Page 9"></div>
+            <div class="carousel-slide"><img src="https://placehold.co/800x600?text=Page+10" alt="Page 10"></div>
+
+            <!-- 使用 Desktop App 的 image_server 提供可以通过 HTTP Get 到的图像-->
+            <!-- <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251102_120041.jpg" alt="Page 1"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251102_120335.jpg" alt="Page 2"></div> -->
+            <!-- <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251102_120337.jpg" alt="Page 3"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251102_102236.jpg" alt="Page 4"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251102_120044.jpg" alt="Page 5"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251102_120130.jpg" alt="Page 6"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251102_120419.jpg" alt="Page 7"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251102_120309.jpg" alt="Page 8"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251102_120340.jpg" alt="Page 9"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251102_120341.jpg" alt="Page 10"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251102_102244.jpg" alt="Page 11"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251102_120144.jpg" alt="Page 12"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251102_102441.jpg" alt="Page 13"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251102_120410.jpg" alt="Page 14"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251102_115535.jpg" alt="Page 15"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251102_120416.jpg" alt="Page 16"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251102_120415.jpg" alt="Page 17"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251102_120103.jpg" alt="Page 18"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251101_205040.jpg" alt="Page 19"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251102_120313.jpg" alt="Page 20"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251102_102830.jpg" alt="Page 21"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251101_203423.jpg" alt="Page 22"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20251102_120339.jpg" alt="Page 23"></div> -->
+
+            <!-- <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_153508.jpg"alt="Page 1"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_153427.jpg"alt="Page 2"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_153416.jpg"alt="Page 3"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_153328.jpg"alt="Page 4"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_153308.jpg"alt="Page 5"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_153303.jpg"alt="Page 6"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_153233.jpg"alt="Page 7"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_153156.jpg"alt="Page 8"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_153140.jpg"alt="Page 9"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_153137.jpg"alt="Page 10"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_153116.jpg"alt="Page 11"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_153103.jpg"alt="Page 12"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_153051.jpg"alt="Page 13"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_153036.jpg"alt="Page 14"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_153020.jpg"alt="Page 15"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_152952.jpg"alt="Page 16"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_152943.jpg"alt="Page 17"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_152931.jpg"alt="Page 18"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_152926.jpg"alt="Page 19"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_152854.jpg"alt="Page 20"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_152839.jpg"alt="Page 21"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_152819.jpg"alt="Page 22"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_152814.jpg"alt="Page 23"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_152753.jpg"alt="Page 24"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_152744.jpg"alt="Page 25"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_152729.jpg"alt="Page 26"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_152716.jpg"alt="Page 27"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_152656.jpg"alt="Page 28"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_152625.jpg"alt="Page 29"></div>
+            <div class="carousel-slide"><img src="http://localhost:1234/images/IMG_20260101_152611.jpg"alt="Page 30"></div>
+
+
+        </div>
+
+        <!-- 左右切换箭头 -->
+        <button class="carousel-btn btn-prev" id="prevBtn">&#10094;</button>
+        <button class="carousel-btn btn-next" id="nextBtn">&#10095;</button>
+
+        <!-- 底部圆点指示器 -->
+        <div class="carousel-indicators" id="indicators">
+            <!-- JS 会自动在这里生成10个圆点 -->
+        </div>
+
+    </div>
+
+    <!-- 引入 JS 文件 -->
+    <script src="slideshow.js"></script>
+</body>
+</html>

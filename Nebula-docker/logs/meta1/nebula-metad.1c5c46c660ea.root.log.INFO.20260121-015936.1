@@ -1,0 +1,53 @@
+Log file created at: 2026/01/21 01:59:36
+Running on machine: 1c5c46c660ea
+Running duration (h:mm:ss): 0:00:00
+Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I20260121 01:59:36.946265     1 MetaDaemon.cpp:137] localhost = "metad1":9559
+I20260121 01:59:36.970714     1 NebulaStore.cpp:48] Start the raft service...
+I20260121 01:59:36.973220     1 NebulaSnapshotManager.cpp:25] Send snapshot is rate limited to 10485760 for each part by default
+I20260121 01:59:37.221541     1 RaftexService.cpp:46] Start raft service on 9560
+I20260121 01:59:37.232324     1 NebulaStore.cpp:82] Scan the local path, and init the spaces_
+I20260121 01:59:37.244026     1 NebulaStore.cpp:90] Scan path "/data/meta/nebula/0"
+I20260121 01:59:37.244221     1 NebulaStore.cpp:292] Init data from partManager for "metad1":9559
+I20260121 01:59:37.245015     1 NebulaStore.cpp:417] Create data space 0
+I20260121 01:59:37.425278    74 RocksEngine.cpp:107] open rocksdb on /data/meta/nebula/0/data
+I20260121 01:59:37.460804     1 NebulaStore.cpp:480] Space 0, part 0 has been added, asLearner 0
+I20260121 01:59:37.461067     1 NebulaStore.cpp:75] Register handler...
+I20260121 01:59:37.461519     1 MetaDaemonInit.cpp:106] Waiting for the leader elected...
+I20260121 01:59:37.461763     1 MetaDaemonInit.cpp:118] Leader has not been elected, sleep 1s
+I20260121 01:59:38.453279     1 MetaDaemonInit.cpp:153] Get meta version is 4
+I20260121 01:59:38.453568     1 MetaDaemonInit.cpp:169] Nebula store init succeeded, clusterId 1203259763272530483
+I20260121 01:59:38.453670     1 MetaDaemon.cpp:150] Start http service
+I20260121 01:59:38.454275     1 MetaDaemonInit.cpp:226] Starting Meta HTTP Service
+I20260121 01:59:38.457147    97 WebService.cpp:124] Web service started on HTTP[19559]
+I20260121 01:59:38.457293     1 MetaDaemonInit.cpp:192] Check root user
+I20260121 01:59:38.457438     1 RootUserMan.h:35] God user exists
+I20260121 01:59:38.460297     1 MetaDaemon.cpp:193] The meta daemon start on "metad1":9559
+I20260121 01:59:38.460469     1 JobManager.cpp:88] Not leader, skip reading remaining jobs
+I20260121 01:59:38.460717     1 JobManager.cpp:64] JobManager initialized
+I20260121 01:59:38.460744   103 JobManager.cpp:150] JobManager::scheduleThread enter
+I20260121 01:59:38.614944   112 HBProcessor.cpp:33] Receive heartbeat from "graphd":9669, role = GRAPH
+I20260121 01:59:38.616729   112 HBProcessor.cpp:89] Update host "graphd":9669 dir info, root path: /usr/local/nebula, data path size: 0
+I20260121 01:59:40.784508   112 HBProcessor.cpp:33] Receive heartbeat from "storaged0":9779, role = STORAGE
+I20260121 01:59:40.784727   112 HBProcessor.cpp:41] Machine "storaged0":9779 is not registered
+I20260121 02:06:54.409132     1 MetaDaemon.cpp:230] Signal 15(Terminated) received, stopping this server
+I20260121 02:06:54.413183     1 JobManager.cpp:138] JobManager::shutDown() begin
+I20260121 02:06:54.418809   103 JobManager.cpp:155] Detect shutdown called, exit
+I20260121 02:06:54.419128   103 JobDescription.cpp:113] Loading job description failed, error: E_LEADER_CHANGED
+I20260121 02:06:54.419322   103 JobManager.cpp:175] Load an invalid job from space 0 jodId 0
+I20260121 02:06:54.420112     1 JobManager.cpp:146] JobManager::shutDown() end
+I20260121 02:06:54.420460     1 NebulaStore.cpp:343] Stop the raft service...
+I20260121 02:06:54.420933     1 RaftexService.cpp:67] Stopping the raftex service on port 9560
+I20260121 02:06:54.421250     1 RaftexService.cpp:77] All partitions have stopped
+I20260121 02:06:54.421996     1 NebulaStore.cpp:346] Stop kv engine...
+I20260121 02:06:54.423213     1 NebulaStore.cpp:343] Stop the raft service...
+I20260121 02:06:54.423477     1 RaftexService.cpp:67] Stopping the raftex service on port 9560
+I20260121 02:06:54.423707     1 RaftexService.cpp:77] All partitions have stopped
+I20260121 02:06:54.423939     1 NebulaStore.cpp:346] Stop kv engine...
+I20260121 02:06:54.424166     1 NebulaStore.cpp:36] Cut off the relationship with meta client
+I20260121 02:06:54.428265     1 Part.h:59] [Port: 9560, Space: 0, Part: 0] ~Part()
+I20260121 02:06:54.429061     1 RocksEngine.h:247] Release rocksdb on /data/meta/nebula/0
+I20260121 02:06:54.436421     1 NebulaStore.cpp:44] ~NebulaStore()
+I20260121 02:06:54.437130     1 MetaDaemon.cpp:215] The meta Daemon stopped
+I20260121 02:06:54.442864     1 JobManager.cpp:138] JobManager::shutDown() begin
+I20260121 02:06:54.443243     1 JobManager.cpp:141] JobManager not running, exit
