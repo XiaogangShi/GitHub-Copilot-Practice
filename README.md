@@ -6,7 +6,6 @@
 # 2， 过程中逐步采用到的工具和技术为：
 ## 层次1， 在 VSCode 中，利用GitHub Copilot 插件来辅助编程。
 * 比如 new-code/ 目录，re/ 目录，toGenerateANewDoc-in-GithubCopilot/ 目录
-* 原有复杂项目中使用 Github Copilot 来辅助修改，比如 NebulaGraphStudio/ 目录
 
 ## 层次2，GitHub Copilot  + Genimi 3 Pro
 Github Copilot 中发现其默认选取的 LLM 能力不强，实践换用 Claude Sonet, Genemi 3 Pro 等大模型来辅助编程。
