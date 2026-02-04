@@ -1,0 +1,29 @@
+"""
+信号处理器
+自动创建用户扩展信息
+"""
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.contrib.auth.models import User
+from .models import UserProfile
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    """
+    当创建新用户时，自动创建对应的UserProfile
+    """
+    if created:
+        UserProfile.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    """
+    保存用户时，同时保存UserProfile
+    """
+    # 使用try-except防止在迁移时出现错误
+    try:
+        instance.profile.save()
+    except UserProfile.DoesNotExist:
+        UserProfile.objects.create(user=instance)
